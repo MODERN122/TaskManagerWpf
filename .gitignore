@@ -1,0 +1,62 @@
+# Build results
+**/[Bb]in/
+**/[Oo]bj/
+**/[Dd]ebug*/
+**/[Rr]elease*/
+**/x64/
+**/x86/
+**/arm/
+**/arm64/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.DotSettings.user
+
+# Resharper / Rider
+_ReSharper*/
+**/*.resharper
+
+# Test & coverage
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*/
+
+# NuGet
+**/packages/
+**/nuget.config.user
+*.nupkg
+*.snupkg
+
+# MSBuild / tooling logs
+*.log
+msbuild.binlog
+
+# Publish / artifacts
+**/publish/
+**/artifacts/
+**/*.appx
+**/*.appxbundle
+**/*.msix
+**/*.msixbundle
+**/*.appinstaller
+
+# Windows / OS files
+Thumbs.db
+Desktop.ini
+
+# Misc
+.DS_Store
+*.tmp
+*.bak
+*.swp
+*.swo
+

@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+indent_style = space
+indent_size = 4
+
+# Solution files usually keep tabs
+[*.sln]
+indent_style = tab
+
+# XAML often prefers 2 spaces, but keep 4 for consistency unless you want otherwise
+[*.xaml]
+indent_style = space
+indent_size = 4
+
+# JSON commonly uses 2 spaces
+[*.json]
+indent_size = 2
+
+# Markdown readability
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+

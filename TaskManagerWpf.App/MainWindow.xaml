@@ -1,0 +1,127 @@
+<Window x:Class="TaskManagerWpf.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManagerWpf.App"
+        xmlns:vm="clr-namespace:TaskManagerWpf.App.ViewModels"
+        mc:Ignorable="d"
+        Title="Task Manager" Height="720" Width="1100"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            FontSize="22"
+            FontWeight="SemiBold"
+            Text="Task Manager" />
+
+        <DockPanel Grid.Row="1" Margin="0,12,0,12" LastChildFill="True">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Margin="0,0,8,0" Padding="12,6" Content="➕ Добавить" Command="{Binding AddTaskCommand}" />
+                <Button Margin="0,0,8,0" Padding="12,6" Content="✏️ Редактировать" Command="{Binding EditSelectedTaskCommand}" />
+                <Button Margin="0,0,8,0" Padding="12,6" Content="🗑️ Удалить" Command="{Binding DeleteSelectedTaskCommand}" />
+                <Button Margin="0,0,8,0" Padding="12,6" Content="✅ Переключить статус" Command="{Binding ToggleStatusCommand}" />
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" Margin="0,0,6,0" Text="Фильтр:" />
+                <ComboBox
+                    Width="160"
+                    Margin="0,0,12,0"
+                    ItemsSource="{Binding StatusFilters}"
+                    SelectedItem="{Binding SelectedStatusFilter}" />
+
+                <TextBlock VerticalAlignment="Center" Margin="0,0,6,0" Text="Сортировка:" />
+                <ComboBox
+                    Width="220"
+                    Margin="0,0,12,0"
+                    ItemsSource="{Binding SortModes}"
+                    SelectedItem="{Binding SelectedSortMode}" />
+
+                <TextBox
+                    Width="260"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                    ToolTip="Поиск по названию и описанию" />
+            </StackPanel>
+        </DockPanel>
+
+        <ListView
+            Grid.Row="2"
+            ItemsSource="{Binding TasksView}"
+            SelectedItem="{Binding SelectedTask}"
+            VirtualizingPanel.IsVirtualizing="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:TaskItemViewModel}">
+                    <Border Style="{StaticResource TaskRowBorderStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding Title}" />
+                                    <Border
+                                        Margin="10,0,0,0"
+                                        Padding="8,2"
+                                        CornerRadius="10"
+                                        Background="{Binding Priority, Converter={StaticResource PriorityToBrushConverter}}">
+                                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="{Binding Priority}" />
+                                    </Border>
+                                    <Border
+                                        Margin="10,0,0,0"
+                                        Padding="8,2"
+                                        CornerRadius="10"
+                                        Background="#6B7280">
+                                        <TextBlock Foreground="White" FontWeight="SemiBold" Text="{Binding Status}" />
+                                    </Border>
+                                </StackPanel>
+
+                                <TextBlock
+                                    Margin="0,6,0,0"
+                                    Foreground="#4B5563"
+                                    TextTrimming="CharacterEllipsis"
+                                    Text="{Binding Description}" />
+
+                                <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+                                    <TextBlock Foreground="#6B7280" Text="Создано: " />
+                                    <TextBlock Foreground="#111827" Text="{Binding CreatedAt, Converter={StaticResource NullableDateToStringConverter}}" />
+
+                                    <TextBlock Margin="18,0,0,0" Foreground="#6B7280" Text="Срок: " />
+                                    <TextBlock
+                                        Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToBrushConverter}}"
+                                        Text="{Binding DueDate, Converter={StaticResource NullableDateToStringConverter}}" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,0,0">
+                                <TextBlock Foreground="{Binding IsOverdue, Converter={StaticResource OverdueToBrushConverter}}" FontWeight="SemiBold">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}">
+                                            <Binding Path="OverdueLabel" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StatusBar Grid.Row="3" Margin="0,12,0,0">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusText}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
