@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "TaskManagerWpf.App (Debug) - dotnet",
+      "type": "dotnet",
+      "request": "launch",
+      "preLaunchTask": "build: TaskManagerWpf.App",
+      "projectPath": "${workspaceFolder}/TaskManagerWpf.App/TaskManagerWpf.App.csproj"
+    },
+    {
+      "name": "TaskManagerWpf.App (Run) - without debugging",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "dotnet run --project \"${workspaceFolder}/TaskManagerWpf.App/TaskManagerWpf.App.csproj\" -c Debug"
+    }
+  ]
+}
+
