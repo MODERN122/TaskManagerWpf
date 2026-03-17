@@ -123,6 +123,12 @@ public sealed partial class MainViewModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    private async Task RefreshAsync()
+    {
+        await InitializeAsync();
+    }
+
     partial void OnSelectedTaskChanged(TaskItemViewModel? value)
     {
         EditSelectedTaskCommand.NotifyCanExecuteChanged();
