@@ -234,7 +234,7 @@ public sealed partial class MainViewModel : ObservableObject
     {
         if (SelectedTask is null) return;
 
-        var ok = _messageService.Confirm($"Удалить задачу \"{SelectedTask.Title}\"?", "Удаление");
+        var ok = _messageService.Confirm($"Вы уверены, что хотите удалить задачу \"{SelectedTask.Title}\"?", "Удаление");
         if (!ok) return;
 
         var toRemove = SelectedTask;
