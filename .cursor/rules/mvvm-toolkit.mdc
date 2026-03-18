@@ -1,0 +1,19 @@
+---
+description: CommunityToolkit.Mvvm usage patterns (ObservableProperty, RelayCommand)
+globs: TaskManagerWpf.App/ViewModels/**/*.cs
+alwaysApply: false
+---
+
+# CommunityToolkit.Mvvm patterns
+
+## Properties
+- Use `[ObservableProperty]` for VM state.
+- Prefer `partial void OnXChanged(...)` for reactions; keep them short.
+
+## Commands
+- Use `[RelayCommand]` and `CanExecute` for enable/disable logic.
+- After changing dependent state, call `SomeCommand.NotifyCanExecuteChanged()`.
+
+## ViewModel boundaries
+- ViewModels depend on **interfaces** for UI and IO (`IDialogService`, `IMessageService`, `ITaskStore`).
+- Do not reference WPF controls in VM.

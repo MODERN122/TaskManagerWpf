@@ -1,0 +1,28 @@
+---
+description: C# conventions for this repo (naming, nullability, errors)
+globs: **/*.cs
+alwaysApply: false
+---
+
+# C# conventions (TaskManagerWpf)
+
+## Naming
+- Public types/members: `PascalCase`
+- Private fields: `_camelCase`
+- Async methods: suffix `Async`
+- Use explicit names for booleans: `isNew`, `hasErrors`, `canAct...`
+
+## Nullability
+- Respect `Nullable=enable`.
+- Prefer `string?` for optional text; normalize “empty” to `null` where it simplifies UX.
+
+## Collections & LINQ
+- Avoid LINQ in hot UI paths; use it for readability in non-critical code.
+- When saving, prefer cloning/snapshots over saving VM instances.
+
+## Error handling
+- Never `catch {}` unless the intent is explicit and safe.
+- If an operation fails (load/save), show a meaningful message via `IMessageService`.
+
+## Testing hooks
+- If your code depends on WPF `CollectionView`, tests may need STA (`StaTest.Run`).

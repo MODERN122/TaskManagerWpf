@@ -1,0 +1,26 @@
+---
+description: Core project standards (WPF/MVVM, quality gates)
+alwaysApply: true
+---
+
+# TaskManagerWpf — core standards
+
+## Goal
+- Keep the app **simple, deterministic, testable**.
+- Prefer **clarity over cleverness**.
+
+## Architecture (high level)
+- WPF app uses **MVVM**.
+- **Models**: pure data (`TaskItem`), no UI dependencies.
+- **ViewModels**: state + commands + validation; no direct `MessageBox`/Window usage.
+- **Views (XAML)**: bindings only; minimal code-behind (wiring/Initialize).
+- **Services**: IO and UI bridges behind interfaces (`ITaskStore`, `IDialogService`, `IMessageService`).
+
+## Quality gates
+- Nullable reference types stay **enabled**; do not silence warnings without cause.
+- Avoid hidden side effects: async methods accept `CancellationToken` when relevant.
+- Errors are user-facing via `IMessageService`; **don’t swallow exceptions silently**.
+
+## Changes policy
+- Prefer **small PR-sized diffs**.
+- Update/extend tests when behavior changes.

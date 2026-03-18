@@ -1,0 +1,22 @@
+---
+description: WPF/XAML patterns (bindings, resources, code-behind boundaries)
+globs: **/*.{xaml,xaml.cs}
+alwaysApply: false
+---
+
+# WPF/XAML patterns
+
+## Binding-first UI
+- Prefer `Binding` + `Command` over event handlers.
+- Keep converters **small and pure**; avoid service calls inside converters.
+
+## Code-behind
+- Allowed: `InitializeComponent()`, window/dialog wiring, focus helpers.
+- Avoid: business logic, data access, state mutations beyond view concerns.
+
+## Resources & styles
+- Prefer reusable `Style`/`DataTemplate` over repeated XAML.
+- Keep visual state logic declarative (triggers), not imperative.
+
+## Threading
+- UI objects must be touched on the UI thread; tests that instantiate WPF view infrastructure may require STA.

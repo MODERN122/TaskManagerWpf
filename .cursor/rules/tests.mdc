@@ -1,0 +1,24 @@
+---
+description: Testing rules (xUnit, STA, test doubles, IO)
+globs: TaskManagerWpf.Tests/**/*.cs
+alwaysApply: false
+---
+
+# Testing rules (xUnit)
+
+## What to test
+- Prefer testing **ViewModel logic** (filter/search/sort/validation) without real UI.
+- IO tests should use temp folders and clean up after themselves.
+
+## STA requirement
+- If a test uses WPF view infrastructure (`CollectionView`/`ICollectionView`),
+  wrap it in `StaTest.Run(() => { ... })`.
+
+## Test doubles
+- Use implementations from `TestDoubles/` to avoid dialogs/message boxes/files:
+  - `InMemoryTaskStore`
+  - `StubDialogService`
+  - `RecordingMessageService`
+
+## Determinism
+- Fix the clock in tests where ordering matters (`CreatedAt`, `DueDate`).
