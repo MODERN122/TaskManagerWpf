@@ -64,3 +64,36 @@ dotnet run --project .\TaskManagerWpf.App\TaskManagerWpf.App.csproj
   - `NullableDateToStringConverter`
   - `OverdueToBrushConverter`
 
+## Тесты
+
+Проект тестов: `TaskManagerWpf.Tests` (xUnit).
+
+### Запуск тестов
+
+Из корня репозитория:
+
+```bash
+dotnet test
+```
+
+Или точечно:
+
+```bash
+dotnet test .\TaskManagerWpf.Tests\TaskManagerWpf.Tests.csproj
+```
+
+### Что покрыто тестами
+
+- **`TaskEditorViewModel`**: валидация и нормализация данных (обязательный `Title`, правила для `DueDate`, `BuildResult()`).
+- **`MainViewModel`**: поиск/фильтрация/сортировка через `ICollectionView`.
+  - Часть тестов запускается через `StaTest.Run(...)`, т.к. WPF-коллекции/`CollectionView` ожидают STA-thread.
+- **`JsonTaskStore`**: seed-сценарий сохранения/загрузки всех статусов/приоритетов и проверка, что кириллица пишется в JSON без `\uXXXX`-экранирования.
+
+### Test doubles
+
+`TaskManagerWpf.Tests/TestDoubles` — тестовые реализации интерфейсов приложения, чтобы тесты были быстрыми и детерминированными:
+
+- `InMemoryTaskStore`: `ITaskStore` в памяти (без файловой системы).
+- `StubDialogService`: `IDialogService` с настраиваемым ответом (возврат результата редактирования/создания).
+- `RecordingMessageService`: `IMessageService`, который записывает показанные сообщения/ошибки и управляет ответом `Confirm(...)`.
+
