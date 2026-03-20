@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using TaskManagerWpf.App.Models;
 using TaskManagerWpf.App.ViewModels;
-using TaskManagerWpf.Tests.TestDoubles;
+using TaskManagerWpf.Tests.MockServices;
 using Xunit;
 
 namespace TaskManagerWpf.Tests;

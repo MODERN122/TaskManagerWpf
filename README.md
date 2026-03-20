@@ -91,7 +91,7 @@ dotnet test .\TaskManagerWpf.Tests\TaskManagerWpf.Tests.csproj
 
 ### Test doubles
 
-`TaskManagerWpf.Tests/TestDoubles` — тестовые реализации интерфейсов приложения, чтобы тесты были быстрыми и детерминированными:
+`TaskManagerWpf.Tests/MockServices` — тестовые реализации интерфейсов приложения, чтобы тесты были быстрыми и детерминированными:
 
 - `InMemoryTaskStore`: `ITaskStore` в памяти (без файловой системы).
 - `StubDialogService`: `IDialogService` с настраиваемым ответом (возврат результата редактирования/создания).

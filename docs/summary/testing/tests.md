@@ -12,7 +12,7 @@
 Причина: некоторые WPF-компоненты завязаны на apartment state и UI thread.
 
 ## Test doubles
-Используем `TaskManagerWpf.Tests/TestDoubles`:
+Используем `TaskManagerWpf.Tests/MockServices`:
 - `InMemoryTaskStore` вместо `JsonTaskStore`
 - `StubDialogService` вместо реального окна
 - `RecordingMessageService` вместо `MessageBox`

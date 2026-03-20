@@ -1,6 +1,6 @@
 using TaskManagerWpf.App.Services;
 
-namespace TaskManagerWpf.Tests.TestDoubles;
+namespace TaskManagerWpf.Tests.MockServices;
 
 public sealed class RecordingMessageService : IMessageService
 {

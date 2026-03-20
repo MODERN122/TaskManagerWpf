@@ -15,7 +15,7 @@ alwaysApply: false
   wrap it in `StaTest.Run(() => { ... })`.
 
 ## Test doubles
-- Use implementations from `TestDoubles/` to avoid dialogs/message boxes/files:
+- Use implementations from `MockServices/` to avoid dialogs/message boxes/files:
   - `InMemoryTaskStore`
   - `StubDialogService`
   - `RecordingMessageService`

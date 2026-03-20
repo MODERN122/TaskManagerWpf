@@ -1,7 +1,7 @@
 using TaskManagerWpf.App.Models;
 using TaskManagerWpf.App.Services;
 
-namespace TaskManagerWpf.Tests.TestDoubles;
+namespace TaskManagerWpf.Tests.MockServices;
 
 public sealed class StubDialogService : IDialogService
 {
